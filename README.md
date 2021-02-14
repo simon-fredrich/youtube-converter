@@ -6,3 +6,6 @@ to your computer. I initially wrote this program for my raspberrypi.
 `pip3 install youtube-dl`
 
 `pip3 install flask`
+
+## Run Server
+`./main.py`
