@@ -13,7 +13,7 @@ def form():
 @app.route('/', methods=['POST'])
 def submit():
   download_file(request.form["textInput"])
-  return send_file("./output.mp3", as_attachment=True)
+  return send_file("output.mp3", as_attachment=True)
 
 class MyLogger(object):
   def debug(self, msg):
@@ -27,14 +27,15 @@ class MyLogger(object):
 
 
 def download_file(path):
-  os.system("rm -rf output.mp3")
+  if (os.path.isfile("output.mp3")):
+    os.system("rm -rf output.mp3")
   ydl_opts = { 
     'format': 'bestaudio/best',
     'postprocessors': [{
         'key': 'FFmpegExtractAudio',
         'preferredcodec': 'mp3',
         'preferredquality': '192',
-    }], 
+    }],
     'logger': MyLogger(),
     'progress_hooks': [my_hook],
     'outtmpl': 'output.mp3',
